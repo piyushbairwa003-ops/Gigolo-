@@ -13,6 +13,7 @@
             --card-bg: rgba(255, 255, 255, 0.05);
         }
 
+        /* Full page layout without a restricted container */
         body, html {
             margin: 0;
             padding: 0;
@@ -20,13 +21,14 @@
             background-color: var(--dark-bg);
             color: white;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             min-height: 100vh;
             overflow-x: hidden;
+            text-align: center;
         }
 
-        /* Grid Background Pattern */
+        /* Premium Grid Background from image_65a826.jpg */
         .grid-bg {
             position: fixed;
             top: 0;
@@ -34,138 +36,150 @@
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(rgba(18, 18, 18, 0.9), rgba(18, 18, 18, 0.9)),
+                linear-gradient(rgba(10, 10, 10, 0.96), rgba(10, 10, 10, 0.96)),
                 linear-gradient(to right, #1a1a1a 1px, transparent 1px),
                 linear-gradient(to bottom, #1a1a1a 1px, transparent 1px);
-            background-size: cover, 40px 40px;
+            background-size: cover, 45px 45px;
             z-index: -1;
         }
 
-        .container {
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        .logo-container {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-
+        /* Logo Styling */
         .logo {
-            width: 120px;
-            height: 120px;
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
             border: 2px solid var(--primary-gold);
             padding: 5px;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+            margin-top: 50px;
+            margin-bottom: 20px;
+            background: black;
         }
 
+        /* Typography */
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
+            font-size: clamp(2.5rem, 8vw, 4rem);
             color: var(--primary-gold);
             margin: 10px 0;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 4px;
+        }
+
+        .gold-label {
+            color: var(--primary-gold);
+            letter-spacing: 5px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 20px;
         }
 
         .sub-headline {
-            font-size: 0.9rem;
-            color: #888;
-            margin-bottom: 30px;
-            line-height: 1.6;
+            max-width: 700px;
+            font-size: 1.1rem;
+            color: #aaa;
+            line-height: 1.8;
+            margin: 0 auto 40px auto;
+            padding: 0 20px;
         }
 
-        /* Stats Grid */
-        .stats-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 15px;
+        /* Global Row Layouts */
+        .full-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            width: 100%;
+            max-width: 900px;
+            margin-bottom: 20px;
+            padding: 0 20px;
+            box-sizing: border-box;
         }
 
-        .stat-box {
+        /* Box styling based on image_65a826.jpg layout */
+        .data-box {
+            flex: 1 1 150px;
             background: var(--card-bg);
-            padding: 15px 5px;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.1);
+            padding: 25px 15px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: all 0.3s ease;
         }
 
-        .stat-box h3 { margin: 0; font-size: 1.2rem; color: var(--primary-gold); }
-        .stat-box p { margin: 0; font-size: 0.7rem; text-transform: uppercase; color: #aaa; }
-        .stat-box .green-text { color: var(--accent-green); }
+        .data-box:hover { border-color: var(--primary-gold); background: rgba(255,255,255,0.08); }
 
-        /* Feature Grid */
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 25px;
-        }
+        .data-box h3 { margin: 0; font-size: 1.8rem; color: var(--primary-gold); }
+        .data-box p { margin: 5px 0 0; font-size: 0.8rem; text-transform: uppercase; color: #777; letter-spacing: 1px; }
 
         .feature-box {
+            flex: 1 1 150px;
             background: var(--card-bg);
-            padding: 15px 5px;
-            border-radius: 12px;
-            border-bottom: 3px solid transparent;
+            padding: 20px 10px;
+            border-radius: 15px;
+            border-bottom: 4px solid transparent;
         }
 
         .feature-box.gold { border-bottom-color: var(--primary-gold); }
         .feature-box.white { border-bottom-color: white; }
         .feature-box.green { border-bottom-color: var(--accent-green); }
 
-        .feature-box img { width: 24px; margin-bottom: 8px; filter: brightness(1.5); }
-        .feature-box span { display: block; font-size: 0.65rem; text-transform: uppercase; font-weight: bold; }
+        .feature-box img { width: 30px; margin-bottom: 12px; filter: grayscale(1) brightness(2); }
+        .feature-box span { display: block; font-size: 0.75rem; text-transform: uppercase; font-weight: 800; letter-spacing: 1px; }
 
-        /* Status Indicators */
-        .status-bar {
+        /* Status Bar */
+        .status-container {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            font-size: 0.75rem;
-            margin-bottom: 30px;
-            color: #bbb;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin: 30px 0;
+            font-size: 0.85rem;
+            color: #999;
         }
 
-        .dot { height: 8px; width: 8px; border-radius: 50%; display: inline-block; margin-right: 5px; }
+        .dot { height: 10px; width: 10px; border-radius: 50%; display: inline-block; margin-right: 8px; }
 
-        /* CTA Button */
-        .btn-join {
-            display: block;
+        /* Massive CTA */
+        .btn-telegram {
+            display: inline-block;
             background: linear-gradient(135deg, #2ecc71, #27ae60);
             color: white;
             text-decoration: none;
-            padding: 18px;
-            border-radius: 15px;
-            font-weight: bold;
-            font-size: 1.2rem;
+            padding: 22px 80px;
+            border-radius: 50px;
+            font-weight: 900;
+            font-size: 1.4rem;
             text-transform: uppercase;
-            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
-            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 15px 35px rgba(46, 204, 113, 0.4);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 20px;
         }
 
-        .btn-join:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 25px rgba(46, 204, 113, 0.4);
+        .btn-telegram:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 45px rgba(46, 204, 113, 0.6);
         }
 
-        .footer-note {
-            margin-top: 15px;
-            font-size: 0.7rem;
-            color: #666;
-        }
-
-        .credit {
-            margin-top: 40px;
+        .footer-small {
             font-size: 0.8rem;
+            color: #555;
+            margin-bottom: 60px;
+        }
+
+        /* Credit Styling */
+        .credit {
+            margin-top: auto;
+            padding: 30px;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            width: 100%;
         }
 
         .credit a {
             color: var(--primary-gold);
             text-decoration: none;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -173,68 +187,62 @@
 
     <div class="grid-bg"></div>
 
-    <div class="container">
-        <!-- Logo Section -->
-        <div class="logo-container">
-            <img src="https://fantasticczone.site/wp-content/uploads/2026/05/asdc.jpg" alt="Play Boy Club Logo" class="logo">
+    <!-- Identity -->
+    <img src="https://fantasticczone.site/wp-content/uploads/2026/05/asdc.jpg" alt="Play Boy Club Logo" class="logo">
+    
+    <div class="gold-label">— LUXURY & SOPHISTICATION —</div>
+    <h1>Play Boy Club</h1>
+    
+    <p class="sub-headline">
+        Established in 2011, we are a Govt. Certified Company providing world-class glamour and entertainment. 
+        Experience the official lifestyle where sophistication meets seduction.
+    </p>
+
+    <!-- Row 1: Statistics -->
+    <div class="full-row">
+        <div class="data-box">
+            <h3>10K+</h3>
+            <p>Active Members</p>
         </div>
-
-        <!-- Headline -->
-        <h1>Play Boy Club</h1>
-        <p style="color: var(--primary-gold); letter-spacing: 3px; font-size: 0.7rem; margin-top: -10px;">— ELITE COMPANIONSHIP —</p>
-        
-        <p class="sub-headline">
-            Experience World-Class Glamour & Luxury Entertainment. <br>
-            Govt. Certified Company • Established 2011
-        </p>
-
-        <!-- Stats -->
-        <div class="stats-container">
-            <div class="stat-box">
-                <h3>10K+</h3>
-                <p>Members</p>
-            </div>
-            <div class="stat-box">
-                <h3>Elite</h3>
-                <p>Profiles</p>
-            </div>
-            <div class="stat-box">
-                <h3 class="green-text">Verified</h3>
-                <p>Authentic</p>
-            </div>
+        <div class="data-box">
+            <h3>Elite</h3>
+            <p>Club Status</p>
         </div>
-
-        <!-- Features -->
-        <div class="feature-grid">
-            <div class="feature-box gold">
-                <img src="https://cdn-icons-png.flaticon.com/512/2583/2583344.png" alt="Icon">
-                <span>Luxury<br>Service</span>
-            </div>
-            <div class="feature-box white">
-                <img src="https://cdn-icons-png.flaticon.com/512/545/545661.png" alt="Icon">
-                <span>Global<br>Access</span>
-            </div>
-            <div class="feature-box green">
-                <img src="https://cdn-icons-png.flaticon.com/512/1067/1067566.png" alt="Icon">
-                <span>Premium<br>Events</span>
-            </div>
+        <div class="data-box">
+            <h3 style="color: var(--accent-green);">FREE</h3>
+            <p>Group Entry</p>
         </div>
-
-        <!-- Status Bar -->
-        <div class="status-bar">
-            <span><span class="dot" style="background: var(--primary-gold);"></span> 24/7 Support</span>
-            <span><span class="dot" style="background: white;"></span> Privacy Guaranteed</span>
-            <span><span class="dot" style="background: var(--accent-green);"></span> Live Now</span>
-        </div>
-
-        <!-- CTA Button -->
-        <a href="https://t.me/+VaFSWVI38FQwYWM9" class="btn-join">Connect on Telegram — Free</a>
-
-        <p class="footer-note">No hidden charges • Secure Connection • Join 10,000+ Elite Members</p>
-
-        <!-- Credit Line -->
-        <p class="credit">Ads by <a href="https://t.me/+TRlJl628l-FkMWE9" target="_blank" rel="noopener">@Nexgroww_agency</a></p>
     </div>
+
+    <!-- Row 2: Icons/Features -->
+    <div class="full-row">
+        <div class="feature-box gold">
+            <img src="https://cdn-icons-png.flaticon.com/512/2583/2583344.png" alt="Icon">
+            <span>Elite<br>Companionship</span>
+        </div>
+        <div class="feature-box white">
+            <img src="https://cdn-icons-png.flaticon.com/512/545/545661.png" alt="Icon">
+            <span>Global<br>Network</span>
+        </div>
+        <div class="feature-box green">
+            <img src="https://cdn-icons-png.flaticon.com/512/1067/1067566.png" alt="Icon">
+            <span>Premium<br>Entertainment</span>
+        </div>
+    </div>
+
+    <!-- Row 3: Status -->
+    <div class="status-container">
+        <span><span class="dot" style="background: var(--primary-gold);"></span> 24/7 Support</span>
+        <span><span class="dot" style="background: white);"></span> Privacy First</span>
+        <span><span class="dot" style="background: var(--accent-green);"></span> Verified Online</span>
+    </div>
+
+    <!-- Action -->
+    <a href="https://t.me/+VaFSWVI38FQwYWM9" class="btn-telegram">Join the Elite Club</a>
+    <p class="footer-small">Join 10,000+ members • Safe & Secure Connection</p>
+
+    <!-- Credit Footer -->
+    <p class="credit">Ads by <a href="https://t.me/+TRlJl628l-FkMWE9" target="_blank" rel="noopener">@Nexgroww_agency</a></p>
 
 </body>
 </html>
